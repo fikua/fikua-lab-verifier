@@ -18,7 +18,10 @@ export interface Env {
 const ROLE_PREFIX = '/verifier';
 
 const BACKEND_PREFIXES = [
-    '/.well-known/ /oid4vp/ /oidc/ /health',
+    '/.well-known/',
+    '/oid4vp/',
+    '/oidc/',
+    '/health',
 ];
 
 function matchesBackend(relativePath: string): boolean {
