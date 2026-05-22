@@ -90,6 +90,11 @@
         };
     }
 
+    // The verifier is served at lab.fikua.com/verifier/ so backend paths
+    // must be prefixed with /verifier/ to reach the role's Worker (which
+    // strips the prefix before forwarding to the backend).
+    const API_PREFIX = '/verifier';
+
     // --- API helper ---
     async function api(method, path, body) {
         const opts = { method, headers: {} };
@@ -97,7 +102,8 @@
             opts.headers['Content-Type'] = 'application/json';
             opts.body = JSON.stringify(body);
         }
-        const res = await fetch(path, opts);
+        const url = path.startsWith('/') ? API_PREFIX + path : path;
+        const res = await fetch(url, opts);
         return res.json();
     }
 
